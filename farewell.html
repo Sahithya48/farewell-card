@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Virtual Farewell Card</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      margin: 0;
+      padding: 0;
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      margin-top: 60px;
+      position: relative;
+      z-index: 2;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #4a148c;
+    }
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+    .section {
+      margin-top: 40px;
+    }
+    .department {
+      margin-bottom: 15px;
+      background-color: #f3e5f5;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .spotify {
+      text-align: center;
+      margin-top: 40px;
+    }
+    iframe {
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-style: italic;
+      color: #6a1b9a;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confettiCanvas"></canvas>
+
+<div class="container">
+  <h1>🎓 Virtual Farewell Card</h1>
+  <h2>To Our Beloved Seniors - Batch of 2021–2025</h2>
+  <p>
+    As you step out into the world, we want to say thank you for all the guidance, fun, and memories you’ve given us.
+    Your presence made our college life unforgettable. From the bottom of our hearts, we wish you success, happiness, and endless opportunities ahead!
+  </p>
+
+  <div class="section">
+    <h2>📘 Departments & Messages</h2>
+    <div class="department"><strong>CSE:</strong> You taught us to debug both code and life. Stay innovative!</div>
+    <div class="department"><strong>ECE:</strong> You resonated positive vibes like perfect circuits. Keep transmitting energy!</div>
+    <div class="department"><strong>Mechanical:</strong> Always grounded yet moving — just like the machines you love. Keep building!</div>
+    <div class="department"><strong>Civil:</strong> You built not just structures, but also strong bonds. Construct greatness!</div>
+    <div class="department"><strong>AI/ML:</strong> Always learning, always evolving. Stay intelligent and keep changing the game!</div>
+    <div class="department"><strong>IS:</strong> Logical, calm, and clever. Keep bridging technology and life!</div>
+  </div>
+
+  <div class="spotify">
+    <h2>🎵 Farewell Playlist</h2>
+    <p>Enjoy the “Farewell Vibes” playlist curated just for you:</p>
+
+    <iframe src="https://open.spotify.com/embed/track/0DomSHNV8p3UlIt5cz80no?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <iframe src="https://open.spotify.com/embed/track/5qtEWwRUX3GKgpWwDQf9SA?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <iframe src="https://open.spotify.com/embed/track/5vTK1aaFZo2auJjQhGgHgD?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <iframe src="https://open.spotify.com/embed/track/1zU8cybPj0Y1QTReskHOCu?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+
+  <footer>
+    With love,<br>
+    Sahithya Reddy & Juniors 💜
+  </footer>
+</div>
+
+<!-- 🎓 Graduation Cap Confetti Script -->
+<script>
+  const canvas = document.getElementById("confettiCanvas");
+  const ctx = canvas.getContext("2d");
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  const capImage = new Image();
+  capImage.src = "https://i.imgur.com/YHoZ7S7.png"; // 🎓 Cap image URL
+
+  const caps = Array.from({ length: 25 }, () => ({
+    x: Math.random() * width,
+    y: Math.random() * height - height,
+    size: 30 + Math.random() * 20,
+    speed: 1 + Math.random() * 2,
+    angle: Math.random() * 2 * Math.PI,
+    spin: (Math.random() - 0.5) * 0.1
+  }));
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    caps.forEach(cap => {
+      cap.y += cap.speed;
+      cap.angle += cap.spin;
+      if (cap.y > height) {
+        cap.y = -50;
+        cap.x = Math.random() * width;
+      }
+      ctx.save();
+      ctx.translate(cap.x, cap.y);
+      ctx.rotate(cap.angle);
+      ctx.drawImage(capImage, -cap.size / 2, -cap.size / 2, cap.size, cap.size);
+      ctx.restore();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  capImage.onload = animate;
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
+
